@@ -30,7 +30,7 @@ git commit -m "Initial commit"
 Then connect it to GitHub:
 
 ```bash
-git remote add origin https://github.com/<you>/<repo>.git
+git remote add origin https://github.com/CaptainCurso/foundry-mcp.git
 git push -u origin main
 ```
 
@@ -57,9 +57,9 @@ Run:
 
 ```bash
 MODULE_VERSION=0.1.0 \
-MODULE_URL=https://github.com/<you>/<repo> \
-MODULE_MANIFEST_URL=https://raw.githubusercontent.com/<you>/<repo>/main/packages/foundryvtt-mcp-bridge-module/module.json \
-MODULE_DOWNLOAD_URL=https://github.com/<you>/<repo>/releases/download/v0.1.0/foundryvtt-mcp-bridge-module-v0.1.0.zip \
+MODULE_URL=https://github.com/CaptainCurso/foundry-mcp \
+MODULE_MANIFEST_URL=https://raw.githubusercontent.com/CaptainCurso/foundry-mcp/main/packages/foundryvtt-mcp-bridge-module/module.json \
+MODULE_DOWNLOAD_URL=https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.0/foundryvtt-mcp-bridge-module-v0.1.0.zip \
 npm run module:prepare-release
 ```
 
