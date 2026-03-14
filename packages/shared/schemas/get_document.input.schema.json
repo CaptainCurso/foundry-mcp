@@ -1,0 +1,76 @@
+{
+  "$ref": "#/definitions/get_document",
+  "definitions": {
+    "get_document": {
+      "type": "object",
+      "properties": {
+        "includeContent": {
+          "type": "boolean",
+          "default": true
+        },
+        "ref": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "JournalEntry",
+                "Actor",
+                "Item",
+                "Note",
+                "Folder",
+                "RollTable",
+                "Playlist",
+                "Scene"
+              ]
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "actorId": {
+              "$ref": "#/definitions/get_document/properties/ref/properties/id"
+            },
+            "parentId": {
+              "$ref": "#/definitions/get_document/properties/ref/properties/id"
+            },
+            "sceneId": {
+              "$ref": "#/definitions/get_document/properties/ref/properties/id"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/get_document/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/get_document/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/get_document/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

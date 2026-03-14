@@ -1,0 +1,172 @@
+{
+  "$ref": "#/definitions/update_actor",
+  "definitions": {
+    "update_actor": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "approvalToken": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 300
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "default": "foundryvtt-mcp-bridge-module"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/update_actor/properties/flags/items/properties/value"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/definitions/update_actor/properties/flags/items/properties/value"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "folderId": {
+          "$ref": "#/definitions/update_actor/properties/actorId"
+        },
+        "img": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "prototypeToken": {
+          "type": "object",
+          "properties": {
+            "actorLink": {
+              "type": "boolean"
+            },
+            "displayBars": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 60
+            },
+            "displayName": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 60
+            },
+            "disposition": {
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "vision": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/update_actor/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/update_actor/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/update_actor/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        },
+        "systemChanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "$ref": "#/definitions/update_actor/properties/flags/items/properties/value"
+              }
+            },
+            "required": [
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "actorId",
+        "dryRun"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

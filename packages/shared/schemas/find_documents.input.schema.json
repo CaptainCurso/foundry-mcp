@@ -1,0 +1,70 @@
+{
+  "$ref": "#/definitions/find_documents",
+  "definitions": {
+    "find_documents": {
+      "type": "object",
+      "properties": {
+        "documentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "JournalEntry",
+              "Actor",
+              "Item",
+              "Note",
+              "Folder",
+              "RollTable",
+              "Playlist",
+              "Scene"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "folderId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "includeContent": {
+          "type": "boolean",
+          "default": false
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 25
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/find_documents/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/find_documents/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/find_documents/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

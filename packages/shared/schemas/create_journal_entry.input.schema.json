@@ -1,0 +1,133 @@
+{
+  "$ref": "#/definitions/create_journal_entry",
+  "definitions": {
+    "create_journal_entry": {
+      "type": "object",
+      "properties": {
+        "approvalToken": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 300
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "default": "foundryvtt-mcp-bridge-module"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/create_journal_entry/properties/flags/items/properties/value"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/definitions/create_journal_entry/properties/flags/items/properties/value"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "folderId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "textContent": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "name",
+              "textContent"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/create_journal_entry/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/create_journal_entry/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/create_journal_entry/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "dryRun",
+        "title"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

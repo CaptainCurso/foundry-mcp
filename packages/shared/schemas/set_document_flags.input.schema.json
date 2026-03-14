@@ -1,0 +1,138 @@
+{
+  "$ref": "#/definitions/set_document_flags",
+  "definitions": {
+    "set_document_flags": {
+      "type": "object",
+      "properties": {
+        "approvalToken": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 300
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "default": "foundryvtt-mcp-bridge-module"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/set_document_flags/properties/flags/items/properties/value"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/definitions/set_document_flags/properties/flags/items/properties/value"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "ref": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "JournalEntry",
+                "Actor",
+                "Item",
+                "Note",
+                "Folder",
+                "RollTable",
+                "Playlist",
+                "Scene"
+              ]
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "actorId": {
+              "$ref": "#/definitions/set_document_flags/properties/ref/properties/id"
+            },
+            "parentId": {
+              "$ref": "#/definitions/set_document_flags/properties/ref/properties/id"
+            },
+            "sceneId": {
+              "$ref": "#/definitions/set_document_flags/properties/ref/properties/id"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/set_document_flags/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/set_document_flags/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/set_document_flags/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "dryRun",
+        "flags",
+        "ref"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

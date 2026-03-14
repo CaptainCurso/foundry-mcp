@@ -1,0 +1,25 @@
+{
+  "name": "foundry-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @foundry-mcp/shared && npm run build -w foundry-mcp-bridge-server && npm run build -w foundryvtt-mcp-bridge-module && npm run export:schemas -w @foundry-mcp/shared",
+    "test": "npm run test --workspaces --if-present",
+    "dev:server": "npm run dev -w foundry-mcp-bridge-server",
+    "dev:module": "npm run dev -w foundryvtt-mcp-bridge-module",
+    "export:schemas": "npm run export:schemas -w @foundry-mcp/shared",
+    "install:module": "node ./scripts/install-foundry-module.mjs",
+    "module:prepare-release": "node ./scripts/release/prepare-foundry-module.mjs",
+    "module:publish-release": "node ./scripts/release/publish-github-release.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}

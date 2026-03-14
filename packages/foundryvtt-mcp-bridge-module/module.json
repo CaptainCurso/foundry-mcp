@@ -1,0 +1,25 @@
+{
+  "id": "foundryvtt-mcp-bridge-module",
+  "title": "Foundry VTT MCP Bridge",
+  "description": "Safety-first Foundry VTT bridge module for a narrow MCP tool surface.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Nicholas McDowell"
+    }
+  ],
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "esmodules": [
+    "dist/module.js"
+  ],
+  "relationships": {
+    "systems": []
+  },
+  "readme": "README.md"
+}

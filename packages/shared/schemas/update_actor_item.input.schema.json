@@ -1,0 +1,141 @@
+{
+  "$ref": "#/definitions/update_actor_item",
+  "definitions": {
+    "update_actor_item": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "approvalToken": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 300
+        },
+        "dryRun": {
+          "type": "boolean"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$",
+                "default": "foundryvtt-mcp-bridge-module"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/update_actor_item/properties/flags/items/properties/value"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "$ref": "#/definitions/update_actor_item/properties/flags/items/properties/value"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "img": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "itemId": {
+          "$ref": "#/definitions/update_actor_item/properties/actorId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "requestContext": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/update_actor_item/properties/requestContext/properties/agentId"
+            },
+            "sessionId": {
+              "$ref": "#/definitions/update_actor_item/properties/requestContext/properties/agentId"
+            },
+            "userId": {
+              "$ref": "#/definitions/update_actor_item/properties/requestContext/properties/agentId"
+            }
+          },
+          "additionalProperties": false
+        },
+        "systemChanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-zA-Z0-9._-]+$"
+              },
+              "value": {
+                "$ref": "#/definitions/update_actor_item/properties/flags/items/properties/value"
+              }
+            },
+            "required": [
+              "path",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "actorId",
+        "dryRun",
+        "itemId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

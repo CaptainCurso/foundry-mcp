@@ -1,0 +1,227 @@
+{
+  "$ref": "#/definitions/get_documentOutput",
+  "definitions": {
+    "get_documentOutput": {
+      "type": "object",
+      "properties": {
+        "audit": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "agentName": {
+              "$ref": "#/definitions/get_documentOutput/properties/audit/properties/agentId"
+            },
+            "foundrySessionId": {
+              "$ref": "#/definitions/get_documentOutput/properties/audit/properties/agentId"
+            },
+            "foundryUserId": {
+              "$ref": "#/definitions/get_documentOutput/properties/audit/properties/agentId"
+            },
+            "requestId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "requestId",
+            "timestamp"
+          ],
+          "additionalProperties": false
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "document": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+                },
+                "img": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "parentId": {
+                  "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+                },
+                "sceneId": {
+                  "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "JournalEntry",
+                    "Actor",
+                    "Item",
+                    "Note",
+                    "Folder",
+                    "RollTable",
+                    "Playlist",
+                    "Scene"
+                  ]
+                },
+                "flags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/get_documentOutput/properties/data/properties/document/properties/flags/additionalProperties"
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "$ref": "#/definitions/get_documentOutput/properties/data/properties/document/properties/flags/additionalProperties"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "folderId": {
+                  "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+                },
+                "pages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "textContent": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "system": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/get_documentOutput/properties/data/properties/document/properties/flags/additionalProperties"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "type"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "document"
+          ],
+          "additionalProperties": false
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "details": {
+                  "$ref": "#/definitions/get_documentOutput/properties/data/properties/document/properties/flags/additionalProperties"
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "requestId": {
+          "$ref": "#/definitions/get_documentOutput/properties/audit/properties/requestId"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error"
+          ]
+        },
+        "timestamp": {
+          "$ref": "#/definitions/get_documentOutput/properties/audit/properties/timestamp"
+        },
+        "tool": {
+          "type": "string",
+          "enum": [
+            "find_documents",
+            "get_document",
+            "list_folders",
+            "get_scene_summary",
+            "create_journal_entry",
+            "update_journal_entry",
+            "create_actor",
+            "update_actor",
+            "create_actor_item",
+            "update_actor_item",
+            "create_scene_note",
+            "set_document_flags",
+            "preview_change",
+            "apply_approved_change"
+          ]
+        }
+      },
+      "required": [
+        "audit",
+        "data",
+        "error",
+        "ok",
+        "requestId",
+        "status",
+        "timestamp",
+        "tool"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
