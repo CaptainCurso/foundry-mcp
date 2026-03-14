@@ -5,6 +5,7 @@ declare const Hooks: {
 declare const game: any;
 declare const ui: any;
 declare const foundry: any;
+declare const FormApplication: any;
 declare const Actor: any;
 declare const Folder: any;
 declare const Item: any;
@@ -14,3 +15,4 @@ declare const RollTable: any;
 declare const Scene: any;
 
 declare function fromUuid(uuid: string): Promise<any>;
+declare function renderTemplate(path: string, data?: Record<string, unknown>): Promise<string>;

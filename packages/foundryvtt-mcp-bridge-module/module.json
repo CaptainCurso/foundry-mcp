@@ -2,7 +2,7 @@
   "id": "foundryvtt-mcp-bridge-module",
   "title": "Foundry VTT MCP Bridge",
   "description": "Safety-first Foundry VTT bridge module for a narrow MCP tool surface.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -14,7 +14,7 @@
   ],
   "url": "https://github.com/CaptainCurso/foundry-mcp",
   "manifest": "https://raw.githubusercontent.com/CaptainCurso/foundry-mcp/main/packages/foundryvtt-mcp-bridge-module/module.json",
-  "download": "https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.0/foundryvtt-mcp-bridge-module-v0.1.0.zip",
+  "download": "https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.1/foundryvtt-mcp-bridge-module-v0.1.1.zip",
   "esmodules": [
     "dist/module.js"
   ],

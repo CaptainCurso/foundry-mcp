@@ -1,12 +1,22 @@
 import { DEFAULT_ALLOWED_FLAG_NAMESPACES, DEFAULT_ALLOWED_OPERATIONS, MODULE_ID, SETTINGS } from "./constants.js";
+import { BridgeSettingsForm } from "./settings-menu.js";
 
 function csv(value: string[]): string {
   return value.join(",");
 }
 
 export function registerSettings(): void {
+  game.settings.registerMenu(MODULE_ID, "bridgeSettingsMenu", {
+    hint: "Configure the Foundry MCP Bridge connection, bridge owner, and write allowlists.",
+    icon: "fas fa-plug",
+    label: "Bridge Settings",
+    name: "Foundry MCP Bridge",
+    restricted: false,
+    type: BridgeSettingsForm,
+  });
+
   game.settings.register(MODULE_ID, SETTINGS.serverUrl, {
-    config: true,
+    config: false,
     default: "http://127.0.0.1:3310",
     hint: "The local Foundry MCP bridge server URL.",
     name: "Bridge Server URL",
@@ -15,7 +25,7 @@ export function registerSettings(): void {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.serverToken, {
-    config: true,
+    config: false,
     default: "",
     hint: "Bearer token that authenticates this module to the local bridge server.",
     name: "Bridge Bearer Token",
@@ -24,7 +34,7 @@ export function registerSettings(): void {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.bridgeOwnerUserId, {
-    config: true,
+    config: false,
     default: "",
     hint: "Only this GM user id is allowed to run the bridge polling loop.",
     name: "Bridge Owner User ID",
@@ -33,7 +43,7 @@ export function registerSettings(): void {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.allowedOperations, {
-    config: true,
+    config: false,
     default: csv(DEFAULT_ALLOWED_OPERATIONS),
     hint: "Comma-separated allowlist of write tool names.",
     name: "Allowed Operations",
@@ -42,7 +52,7 @@ export function registerSettings(): void {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.allowedFlagNamespaces, {
-    config: true,
+    config: false,
     default: csv(DEFAULT_ALLOWED_FLAG_NAMESPACES),
     hint: "Comma-separated allowlist of flag namespaces. Defaults to the module-owned namespace only.",
     name: "Allowed Flag Namespaces",
@@ -51,7 +61,7 @@ export function registerSettings(): void {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.allowedSystemPaths, {
-    config: true,
+    config: false,
     default: "",
     hint: "Comma-separated allowlist of dotted system paths for Actor and Item writes.",
     name: "Allowed System Paths",

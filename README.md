@@ -51,6 +51,7 @@ flowchart LR
    - This creates a symlink (a filesystem shortcut) from your Foundry data folder to `/Users/nicholasmcdowell/Developer/foundry-mcp/packages/foundryvtt-mcp-bridge-module`.
    - Risk: it replaces any existing module folder at the same target path.
 7. In Foundry VTT v13, enable the module and configure its settings as a GM.
+   - Use **Game Settings -> Configure Settings -> Module Settings -> Foundry MCP Bridge -> Bridge Settings**.
 8. Keep one dedicated GM session open so the bridge can poll for work.
 9. Start the MCP bridge server with `node /Users/nicholasmcdowell/Developer/foundry-mcp/packages/foundry-mcp-bridge-server/dist/index.js`.
 

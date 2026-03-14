@@ -43,7 +43,7 @@ fs.mkdirSync(releaseDir, { recursive: true });
 const outputZip = path.join(releaseDir, `foundryvtt-mcp-bridge-module-v${version}.zip`);
 
 execSync(
-  `cd ${shellQuote(moduleDir)} && zip -r ${shellQuote(outputZip)} module.json dist README.md -x '*.DS_Store'`,
+  `cd ${shellQuote(moduleDir)} && zip -r ${shellQuote(outputZip)} module.json dist README.md templates -x '*.DS_Store'`,
   { stdio: "inherit" }
 );
 

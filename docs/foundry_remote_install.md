@@ -56,10 +56,10 @@ From:
 Run:
 
 ```bash
-MODULE_VERSION=0.1.0 \
+MODULE_VERSION=0.1.1 \
 MODULE_URL=https://github.com/CaptainCurso/foundry-mcp \
 MODULE_MANIFEST_URL=https://raw.githubusercontent.com/CaptainCurso/foundry-mcp/main/packages/foundryvtt-mcp-bridge-module/module.json \
-MODULE_DOWNLOAD_URL=https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.0/foundryvtt-mcp-bridge-module-v0.1.0.zip \
+MODULE_DOWNLOAD_URL=https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.1/foundryvtt-mcp-bridge-module-v0.1.1.zip \
 npm run module:prepare-release
 ```
 
@@ -103,6 +103,7 @@ In Foundry:
 2. Click **Install Module**.
 3. Paste the manifest URL from `MODULE_MANIFEST_URL`.
 4. Install and enable `Foundry VTT MCP Bridge`.
+5. Open **Game Settings -> Configure Settings -> Module Settings** and use the module's own **Bridge Settings** button.
 
 ## Update flow
 
