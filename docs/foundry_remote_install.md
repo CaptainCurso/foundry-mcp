@@ -56,10 +56,10 @@ From:
 Run:
 
 ```bash
-MODULE_VERSION=0.1.2 \
+MODULE_VERSION=0.1.3 \
 MODULE_URL=https://github.com/CaptainCurso/foundry-mcp \
 MODULE_MANIFEST_URL=https://raw.githubusercontent.com/CaptainCurso/foundry-mcp/main/packages/foundryvtt-mcp-bridge-module/module.json \
-MODULE_DOWNLOAD_URL=https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.2/foundryvtt-mcp-bridge-module-v0.1.2.zip \
+MODULE_DOWNLOAD_URL=https://github.com/CaptainCurso/foundry-mcp/releases/download/v0.1.3/foundryvtt-mcp-bridge-module-v0.1.3.zip \
 npm run module:prepare-release
 ```
 

@@ -1,11 +1,11 @@
 {
   "name": "foundryvtt-mcp-bridge-module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "main": "dist/module.js",
   "scripts": {
-    "build": "tsup src/module.ts --format esm --out-dir dist --clean",
-    "dev": "tsup src/module.ts --format esm --out-dir dist --watch",
+    "build": "tsup --config tsup.config.ts",
+    "dev": "tsup --config tsup.config.ts --watch",
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
