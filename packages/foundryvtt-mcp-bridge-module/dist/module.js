@@ -16,59 +16,57 @@ function csv(value) {
   return value.join(",");
 }
 function registerSettings() {
-  game.settings.registerMenu(MODULE_ID, "bridgeSettingsMenu", {
-    hint: "Configure the Foundry MCP Bridge connection, bridge owner, and write allowlists.",
-    icon: "fas fa-plug",
-    label: "Bridge Settings",
-    name: "Foundry MCP Bridge",
-    restricted: false,
-    type: BridgeSettingsForm
-  });
   game.settings.register(MODULE_ID, SETTINGS.serverUrl, {
-    config: false,
+    config: true,
     default: "http://127.0.0.1:3310",
     hint: "The local Foundry MCP bridge server URL.",
     name: "Bridge Server URL",
+    requiresReload: true,
     scope: "client",
     type: String
   });
   game.settings.register(MODULE_ID, SETTINGS.serverToken, {
-    config: false,
+    config: true,
     default: "",
     hint: "Bearer token that authenticates this module to the local bridge server.",
     name: "Bridge Bearer Token",
+    requiresReload: true,
     scope: "client",
     type: String
   });
   game.settings.register(MODULE_ID, SETTINGS.bridgeOwnerUserId, {
-    config: false,
+    config: true,
     default: "",
     hint: "Only this GM user id is allowed to run the bridge polling loop.",
     name: "Bridge Owner User ID",
+    requiresReload: true,
     scope: "world",
     type: String
   });
   game.settings.register(MODULE_ID, SETTINGS.allowedOperations, {
-    config: false,
+    config: true,
     default: csv(DEFAULT_ALLOWED_OPERATIONS),
     hint: "Comma-separated allowlist of write tool names.",
     name: "Allowed Operations",
+    requiresReload: true,
     scope: "world",
     type: String
   });
   game.settings.register(MODULE_ID, SETTINGS.allowedFlagNamespaces, {
-    config: false,
+    config: true,
     default: csv(DEFAULT_ALLOWED_FLAG_NAMESPACES),
     hint: "Comma-separated allowlist of flag namespaces. Defaults to the module-owned namespace only.",
     name: "Allowed Flag Namespaces",
+    requiresReload: true,
     scope: "world",
     type: String
   });
   game.settings.register(MODULE_ID, SETTINGS.allowedSystemPaths, {
-    config: false,
+    config: true,
     default: "",
     hint: "Comma-separated allowlist of dotted system paths for Actor and Item writes.",
     name: "Allowed System Paths",
+    requiresReload: true,
     scope: "world",
     type: String
   });
@@ -87,68 +85,6 @@ function getWorldSettings() {
     bridgeOwnerUserId: String(game.settings.get(MODULE_ID, SETTINGS.bridgeOwnerUserId) ?? "")
   };
 }
-
-// src/settings-menu.ts
-function csv2(value) {
-  return value.join(", ");
-}
-var BridgeSettingsForm = class extends FormApplication {
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["form", MODULE_ID, "bridge-settings"],
-      closeOnSubmit: true,
-      id: `${MODULE_ID}-settings`,
-      submitOnChange: false,
-      submitOnClose: false,
-      template: `modules/${MODULE_ID}/templates/bridge-settings.hbs`,
-      title: "Foundry MCP Bridge Settings",
-      width: 640
-    });
-  }
-  async getData() {
-    const client = getClientSettings();
-    const world = getWorldSettings();
-    return {
-      allowedFlagNamespaces: csv2(world.allowedFlagNamespaces),
-      allowedOperations: csv2(world.allowedOperations),
-      allowedSystemPaths: csv2(world.allowedSystemPaths),
-      bridgeOwnerUserId: world.bridgeOwnerUserId,
-      canEditWorldSettings: Boolean(game.user?.isGM),
-      currentUserId: String(game.user?.id ?? ""),
-      isGM: Boolean(game.user?.isGM),
-      serverToken: client.serverToken,
-      serverUrl: client.serverUrl,
-      users: [...game.users ?? []].map((user) => ({
-        id: String(user.id),
-        isGM: Boolean(user.isGM),
-        name: String(user.name ?? "")
-      }))
-    };
-  }
-  activateListeners(html) {
-    super.activateListeners(html);
-    const useCurrentUserButton = html[0]?.querySelector?.("[data-action='use-current-user']");
-    useCurrentUserButton?.addEventListener("click", (event) => {
-      event.preventDefault();
-      const input = html[0]?.querySelector?.("input[name='bridgeOwnerUserId']");
-      if (input) {
-        input.value = String(game.user?.id ?? "");
-      }
-    });
-  }
-  async _updateObject(_event, formData) {
-    const toString = (value) => String(value ?? "").trim();
-    await game.settings.set(MODULE_ID, SETTINGS.serverUrl, toString(formData.serverUrl));
-    await game.settings.set(MODULE_ID, SETTINGS.serverToken, toString(formData.serverToken));
-    if (game.user?.isGM) {
-      await game.settings.set(MODULE_ID, SETTINGS.bridgeOwnerUserId, toString(formData.bridgeOwnerUserId));
-      await game.settings.set(MODULE_ID, SETTINGS.allowedOperations, toString(formData.allowedOperations));
-      await game.settings.set(MODULE_ID, SETTINGS.allowedFlagNamespaces, toString(formData.allowedFlagNamespaces));
-      await game.settings.set(MODULE_ID, SETTINGS.allowedSystemPaths, toString(formData.allowedSystemPaths));
-    }
-    ui.notifications?.info?.("Foundry MCP Bridge settings saved.");
-  }
-};
 
 // src/bridge-client.ts
 var BridgeClient = class {

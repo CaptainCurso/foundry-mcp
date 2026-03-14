@@ -14,9 +14,9 @@ This package is the Foundry VTT v13 module side of the bridge. It polls the loca
 1. Build the repo from `/Users/nicholasmcdowell/Developer/foundry-mcp` with `npm run build`.
 2. Link the module with `npm run install:module`.
 3. In Foundry VTT v13, enable `Foundry VTT MCP Bridge`.
-4. As a GM, open the module's dedicated settings window from **Game Settings -> Configure Settings -> Module Settings -> Foundry MCP Bridge -> Bridge Settings**.
+4. As a GM, open **Game Settings -> Configure Settings** and scroll to the `Foundry VTT MCP Bridge` settings.
 5. Set the bridge owner user id, server URL, bearer token, and any optional allowlists.
-5. Keep that GM session open while using the MCP bridge.
+6. Keep that GM session open while using the MCP bridge.
 
 ## GitHub Distribution
 
@@ -31,7 +31,7 @@ See `/Users/nicholasmcdowell/Developer/foundry-mcp/docs/foundry_remote_install.m
 
 ## Settings
 
-This module now uses its own Foundry-style settings window instead of exposing the raw fields in the generic settings list.
+This module now uses Foundry's standard inline settings inside **Game Settings -> Configure Settings**.
 
 - `Bridge Server URL`: local bridge HTTP URL, usually `http://127.0.0.1:3310`
 - `Bridge Bearer Token`: shared bearer token that matches `BRIDGE_SHARED_TOKEN`

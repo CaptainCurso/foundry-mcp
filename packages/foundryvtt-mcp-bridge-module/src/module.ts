@@ -1,4 +1,3 @@
-import "./settings-menu.js";
 import { registerSettings } from "./settings.js";
 import { startBridgeRuntime } from "./runtime.js";
 
